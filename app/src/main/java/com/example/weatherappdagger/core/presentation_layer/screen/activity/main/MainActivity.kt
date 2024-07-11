@@ -3,14 +3,17 @@ package com.example.weatherappdagger.core.presentation_layer.screen.activity.mai
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatherappdagger.R
 import com.example.weatherappdagger.core.App
 import com.example.weatherappdagger.core.data.model.Computer
 import com.example.weatherappdagger.databinding.ActivityMainBinding
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val navigator = AppNavigator(this, R.id.fragments_container)
 
     @Inject
     lateinit var computer: Computer
@@ -28,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
+
+
 //        viewModel.randomText.observe(this) { it ->
 //            binding.textViewId.text = it
 //        }
@@ -36,5 +41,16 @@ class MainActivity : AppCompatActivity() {
 //            binding.textViewId.text=it
 //        }
 
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        App.navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        App.navigatorHolder.removeNavigator()
+        super.onPause()
     }
 }

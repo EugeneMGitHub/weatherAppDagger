@@ -4,21 +4,28 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import com.example.weatherappdagger.core.data.repository.weather_repository.WeatherRepository
+import com.example.weatherappdagger.core.presentation_layer.navigation.Navigation
+import com.example.weatherappdagger.core.presentation_layer.navigation.Screens
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 
 class MainViewModel(
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {
 
     init{
-        getWeather("Moscow")
+        openFirstScreen()
     }
     val randomText: MutableLiveData<String> = MutableLiveData("FirstValue")
     val cityWeather: MutableLiveData<String> = MutableLiveData("NoWeatherGotten")
+
+    private fun openFirstScreen() {
+        val firstScreen = Screens.home()
+        Navigation.getRouter().newRootScreen(firstScreen)
+    }
 
     private fun getWeather(city: String){
      viewModelScope.launch {
