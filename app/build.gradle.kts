@@ -29,75 +29,80 @@ android {
 //            }
 //        }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        buildTypes {
+            release {
+                isMinifyEnabled = false
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+
+        buildFeatures {
+            buildConfig = true
+            dataBinding = true
+        }
+        viewBinding {
+            enable = true
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 
-    buildFeatures {
-     buildConfig = true
-     dataBinding = true
-    }
-   viewBinding {
-       enable = true
-   }
-}
+    dependencies {
 
-dependencies {
-    // ========================= DAGGER =========================
-    implementation(libs.dagger)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.dagger.compiler)
+        implementation(project(":composeMod"))
 
-    // ========================= NETWORK =========================
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.library)
+        // ========================= DAGGER =========================
+        implementation(libs.dagger)
+        //noinspection KaptUsageInsteadOfKsp
+        kapt(libs.dagger.compiler)
 
-    // ========================= COIL =========================
-    implementation(libs.coil)
-    implementation(libs.coil.svg)
+        // ========================= NETWORK =========================
+        implementation(libs.okhttp)
+        implementation(libs.logging.interceptor)
+        implementation(libs.retrofit)
+        implementation(libs.converter.gson)
+        implementation(libs.library)
 
-    // ========================= GLIDE =========================
-    implementation(libs.glide)
-    implementation(libs.annotations)
-    implementation(libs.okhttp3.integration)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.compiler)
+        // ========================= COIL =========================
+        implementation(libs.coil)
+        implementation(libs.coil.svg)
 
-    // ========================= CICERONE =========================
+        // ========================= GLIDE =========================
+        implementation(libs.glide)
+        implementation(libs.annotations)
+        implementation(libs.okhttp3.integration)
+        //noinspection KaptUsageInsteadOfKsp
+        kapt(libs.compiler)
+
+        // ========================= CICERONE =========================
 //    implementation(libs.cicerone)
-    implementation(libs.terrakok.cicerone)
+        implementation(libs.terrakok.cicerone)
 
-    // ========================= JETPACK =========================
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+        // ========================= JETPACK =========================
+        implementation(libs.androidx.lifecycle.livedata.ktx)
+        implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
-    implementation("androidx.fragment:fragment-ktx:1.7.1")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+        implementation("androidx.fragment:fragment-ktx:1.7.1")
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-}
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.appcompat)
+        implementation(libs.material)
+        implementation(libs.androidx.activity)
+        implementation(libs.androidx.constraintlayout)
+        testImplementation(libs.junit)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
+
+
+    }
 }
